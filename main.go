@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"symmer/utils"
 )
@@ -28,8 +27,8 @@ func ConfigCheck() *os.File {
 		if os.IsNotExist(err) {
 			utils.SymmerPrint("Missing config, creating...")
 			file = CreateConfig()
-			fmt.Println("Config created, fill it out and rerun symmer.")
-			os.Exit(1)
+			utils.SymmerPrint("Config created, fill it out and rerun symmer.")
+			os.Exit(0)
 		}
 	}
 	return file
@@ -43,8 +42,11 @@ func CreateConfig() *os.File {
 	// if the file exists then it'll skip the error check
 	if os.IsExist(err) {
 		goto Return
+	} else {
+		s := "{}\n"
+		file.Write([]byte(s))
 	}
-	
+
 	// Presents the user with an error stating that the json config can't be created
 	if err != nil {
 		utils.SymmerError("Unable to create json config file in current directory. Review error below")
