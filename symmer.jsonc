@@ -1,6 +1,0 @@
-{
-	"Notepad": {
-		"config": "/home/tyler/Documents/Notes/ips_and_ports.md", // Config location/storage 
-		"symlink": "/home/tyler/Documents/Testing/ips.md" // Point where config will be symlinked
-	}
-}
