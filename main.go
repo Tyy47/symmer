@@ -9,8 +9,8 @@ import (
 
 
 type Config struct {
-	CurrentConfigLocation string `json:"config_location"`
-	FuturedSymLocation string `json:"symlink_location"`
+	CurrentConfigLocation string `json:"config"`
+	FuturedSymLocation string `json:"symlink"`
 }
 
 type MapConfig map[string]Config
@@ -40,6 +40,14 @@ func OpenJSON(file *os.File) MapConfig {
 	return cfg
 }
 
+func CreateSymLink(config string, symlinkLocation string) error {
+	if err := os.Symlink(config, symlinkLocation); err != nil {
+		return err
+	} else {
+		return nil
+	}
+}
+
 func main() {
 
 	file := ConfigCheck()
@@ -48,6 +56,14 @@ func main() {
 	cfg := OpenJSON(file)
 
 	for k, v := range cfg {
-		fmt.Printf("Config: %v has been symmed to %v\n", k, v.FuturedSymLocation)
+		err := CreateSymLink(v.CurrentConfigLocation, v.FuturedSymLocation)
+
+		if err != nil {
+			fmt.Printf("symmer: Unable to create symlink for %s. Check both locations for potential errors.", k)
+			continue
+		} else {
+			fmt.Printf("symmer: Config %s symlinked successfully!\n%s ==> %s\n", k, v.CurrentConfigLocation, v.FuturedSymLocation)
+		}
 	}
+
 }
