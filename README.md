@@ -5,7 +5,7 @@ ___
 ## Description
 ___
 
-symmer is my simplier take on nixos's home manager system. symmer is an easier
+symmer is my simplier take on NixOS's Home Manager system. symmer is an easier
 way to manage your dotfiles and keep them all in one place using symlinks. this
 in turn makes handling configurations for different apps way simplier while
 using the power of git to keep everything in one spot and version managed. 
