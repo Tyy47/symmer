@@ -43,12 +43,12 @@ When running symmer for the first time, a JSON config file will be created for y
 ```json
 {
     "Niri": {
-        "cfg": "/home/$USER/Symmed_Configs/Niri/config.kdl", // Config stored in git repo
-        "des": "/home/$USER/.config/niri/config.kdl" // Where config usually is normally
+        "cfg": "/home/USER/Symmed_Configs/Niri/config.kdl", // Config stored in git repo
+        "des": "/home/USER/.config/niri/config.kdl" // Where config usually is normally
     },
     "Neovim": { 
-        "cfg": "/home/tyler/Symmed_Configs/Neovim/*", // Supports wildcards!
-        "des": "/home/tyler/.config/neovim/"
+        "cfg": "/home/USER/Symmed_Configs/Neovim/*", // Supports wildcards!
+        "des": "/home/USER/.config/neovim/"
     }
 }
 ```
