@@ -1,2 +1,4 @@
 symmer
 symmer.json
+compile-go.sh
+release
