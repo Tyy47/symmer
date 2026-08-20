@@ -10,8 +10,8 @@ import (
 
 // Config type for json structure
 type Config struct {
-	CurrentConfigLocation string `json:"config"`
-	FuturedSymLocation string `json:"symlink"`
+	CurrentConfigLocation string `json:"cfg"`
+	FuturedSymLocation string `json:"des"`
 }
 
 // Mapped config of the json structure with a string acting as the title of the config
