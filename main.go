@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"symmer/utils"
 )
@@ -63,6 +64,16 @@ func OpenJSON(file *os.File) MapConfig {
 	// Creates a config object to hold the future decoded json
 	var cfg MapConfig
 	
+	// Opens and reads the json config
+	data, err := os.ReadFile(file.Name())
+	if err != nil {
+		// If unable to read, symmer will present an error and quit.
+		utils.SymmerError("Unable to read symmer config")
+		utils.SymmerError(err.Error())
+		os.Exit(1)
+	}
+	
+
 	// Attempts to decode the json and presents the user with an error message if unable to create it.
 	if err := json.NewDecoder(file).Decode(&cfg); err != nil {
 		utils.SymmerError("Error decoding json")
@@ -70,9 +81,15 @@ func OpenJSON(file *os.File) MapConfig {
 		os.Exit(1)
 	}
 
-	
+
 	// Success message and returns the decoded config
-	utils.SymmerPrint("Config loaded successfully.")
+	// Checks if the file is an empty config or not. If so, it'll display a different confirmation message.
+	if string(data) == "{}\n" {
+		utils.SymmerPrint("Config loaded successfully but it's empty.")
+	} else {
+		utils.SymmerPrint("Config loaded successfully.")
+	}
+
 	return cfg
 }
 
@@ -89,7 +106,8 @@ func CreateSymLink(config string, symlinkLocation string, configName string) err
 	}
 }
 
-func main() {
+// Runs the symlinking process for symmer.
+func RunSymmer() {
 	// Opens the file after it checks if it exists
 	file := ConfigCheck()
 	defer file.Close()
@@ -110,4 +128,33 @@ func main() {
 			utils.SymmerPrint("Symlink for " + k + " created successfully!")
 		}
 	}
+}
+
+// Prints the symmer version to the user.
+func GetSymmerVersion() {
+	fmt.Printf("symmer version: %v\n", utils.GreenText(utils.SYMMER_VERSION))
+}
+
+// Prints the help menu for symmer.
+func PrintSymmerHelp() {
+	helpMenu := "usage: symmer [-h | --help] [-v | --version]"
+
+	fmt.Println(helpMenu)
+}
+
+func main() {
+	args := os.Args
+
+	if len(args) < 2 {
+		RunSymmer()
+		os.Exit(0)
+	}
+
+	switch args[1] {
+	case "-v", "--version":
+		GetSymmerVersion()
+	case "-h", "--help":
+		PrintSymmerHelp()
+	}
+
 }

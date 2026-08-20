@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+const SYMMER_VERSION = "1.0.0"
+
 // Returns the given argument as bold white
 func WhiteText(v string) string {
 	return "\033[1;99m" + v + "\033[0m"
@@ -12,6 +14,11 @@ func WhiteText(v string) string {
 // Returns the given argument as bold red
 func RedText(v string) string {
 	return "\033[1;91m" + v + "\033[0m"
+}
+
+// Returns the given argument as bold green
+func GreenText(v string) string {
+	return "\033[1;92m" + v + "\033[0m"
 }
 
 // Prints the given value with symmer: prefixed on the value.
