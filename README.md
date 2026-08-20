@@ -11,12 +11,24 @@ ___
 ## Install
 ___
 
+### Releases
+1. Download executable for your OS in the Releases page.
+2. Move symmer to a sourced location
+3. Use ```symmer``` in your terminal to get started!
+
+### Build
+```go
+git clone https://github.com/Tyy47/symmer.git
+cd symmer  
+go build
+```
+
 ### Go Install
-`
-git clone https://github.com/Tyy47/symmer.git \
-cd symmer \
+```go
+git clone https://github.com/Tyy47/symmer.git
+cd symmer  
 go install
-`
+```
 
 ### Portable
 ___
@@ -27,3 +39,4 @@ ___
 
 ## Usage
 ___
+#### 
