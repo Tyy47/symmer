@@ -3,7 +3,6 @@
 ___
 
 ## Description
-___
 
 symmer is my simplier take on NixOS's Home Manager system. symmer is an easier
 way to manage your dotfiles and keep them all in one place using symlinks. This
@@ -13,7 +12,6 @@ using the power of git to keep everything in one spot and version managed.
 
 
 ## Install options
-___
 
 ### Releases
 1. Download executable for your OS in the Releases page.
@@ -35,14 +33,12 @@ go install
 ```
 
 ### Portable
-___
 1. Download the executable via the Releases page.
 2. Place the symmer executable inside of your configurations folder.
 3. Run symmer to generate a config and fill it out with your configuration paths.
 
 
 ## Usage
-___
 When running symmer for the first time, a JSON config file will be created for you to start filling out your pathways and apps. Below is an example of how to write a symmer config.
 ```json
 {
