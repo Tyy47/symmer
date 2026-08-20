@@ -6,7 +6,7 @@ ___
 ___
 
 symmer is my simplier take on NixOS's Home Manager system. symmer is an easier
-way to manage your dotfiles and keep them all in one place using symlinks. this
+way to manage your dotfiles and keep them all in one place using symlinks. This
 in turn makes handling configurations for different apps way simplier while
 using the power of git to keep everything in one spot and version managed. 
 
@@ -43,7 +43,7 @@ ___
 
 ## Usage
 ___
-When running symmer for the first time, a json config file will be created for you to start filling out your pathways and apps. Below is an example of how to write a symmer config.
+When running symmer for the first time, a JSON config file will be created for you to start filling out your pathways and apps. Below is an example of how to write a symmer config.
 ```json
 {
     "Niri": {
@@ -53,11 +53,13 @@ When running symmer for the first time, a json config file will be created for y
 }
 ```
 
-Above is an example of how to setup a niri config using symmer. To create a link first you'll put the name as the identifier ( This can be anything but it's best to put the name of your config to make it visiable to you in the terminal if it worked or not ). 
+Above is an example of how to setup a niri config using symmer. To create a link first you'll put the name as the identifier ( This can be anything but it's best to put the name of the application to make it visible to you in the terminal if it worked or not ). 
 
 Next you'll put the location of where you stored your config, this will be placed inside of a git repo so it can be backed up and rewound if there is any issues.
 
 Lastly, the symlink section is to where you want this config to be, for example, Niri's config loads in .config/niri/config.kdl so I assigned the symlink to be at that location so Niri can load it.
+
+Finally, once all applications and pathways are filled out that you require, re-run symmer and it'll get to work symlinking all of your dotfiles!
 
 ## License
 symmer is under the MIT license.
