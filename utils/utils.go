@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-const SYMMER_VERSION = "1.0.0"
+const SYMMER_VERSION = "1.1"
 
 // Returns the given argument as bold white
 func WhiteText(v string) string {

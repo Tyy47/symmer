@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"symmer/utils"
 )
 
@@ -93,17 +94,48 @@ func OpenJSON(file *os.File) MapConfig {
 	return cfg
 }
 
-// Creates a symlink based on the configuration options given in the json config file
-func CreateSymLink(config string, symlinkLocation string, configName string) error {
-	// Attempts to create the symlink. If unable to create one, it will print an error message for the user and return the error.
-	if err := os.Symlink(config, symlinkLocation); err != nil {
-		utils.SymmerError("Unable to create a symlink for " + configName + ". Review error below.")
-		utils.SymmerError(err.Error())
-		return err
-	} else {
-		// Returns nil if there is no issue with creating the symlink
-		return nil
+// Creates symlinks based on the configuration options given in the json config file
+func CreateSymlinks(configName string, configLocation string, configDestination string) error {
+
+	// Searches through files given
+	matches, err := filepath.Glob(configLocation)
+	if err != nil {
+		return fmt.Errorf("Invalid location given %q: %w", configLocation, err)
 	}
+	
+	// If there is no files, it'll return an error.
+	if len(matches) == 0 {
+		return fmt.Errorf("no files matched %q", configLocation)
+	}
+	
+	// Attempt to make a directory for the destination if it doesn't exist
+	if err := os.MkdirAll(configDestination, 0755); err != nil {
+		if os.IsExist(err) {
+			utils.SymmerPrint("file/directory already exists")
+		}
+	}
+	
+	// Loop through all files and creates absolute paths for each found file/directory
+	for _, source := range matches {
+		absSource, err := filepath.Abs(source)
+		if err != nil {
+			return err
+		}
+		
+		// Joins the absolute path and joins it with the config destination 
+		destination := filepath.Join(
+			configDestination,
+			filepath.Base(source),
+		)
+		
+		// Attempts to create a symlink for a config, returns an error if unable to create one
+		if err := os.Symlink(absSource, destination); err != nil {
+			utils.SymmerError(err)
+		}
+	}
+	
+	// Return nil to satisfy the functions return requirement
+	return nil
 }
 
 // Runs the symlinking process for symmer.
@@ -118,12 +150,11 @@ func RunSymmer() {
 	// Loop over every entry in config file 
 	for k, v := range cfg {
 		// Attempts to create a symlink via the given paths
-		err := CreateSymLink(v.CurrentConfigLocation, v.FuturedSymLocation, k)
+		err := CreateSymlinks(k, v.CurrentConfigLocation, v.FuturedSymLocation)
 		
 		// If an error occurs, prompts the user that symmer cant make the symlink and provides the error for the user to review
 		if err != nil {
-			utils.SymmerError("Unable to create symlink for " + k + ". Review error below.")
-			utils.SymmerError(err.Error())
+			utils.SymmerError("Unable to create symlink for " + k)
 		} else {
 			utils.SymmerPrint("Symlink for " + k + " created successfully!")
 		}
