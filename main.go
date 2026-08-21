@@ -173,6 +173,12 @@ func PrintSymmerHelp() {
 	fmt.Println(helpMenu)
 }
 
+// Prints a usage message to the user if they input an unsupported argument.
+func PrintMissInput(arg string) {
+	fmt.Printf("Unknown argument %s.\n", arg)
+	fmt.Println("usage: symmer [-h | --help] [-v | --version]")
+}
+
 func main() {
 	args := os.Args
 
@@ -186,6 +192,8 @@ func main() {
 		GetSymmerVersion()
 	case "-h", "--help":
 		PrintSymmerHelp()
+	default:
+		PrintMissInput(args[1])
 	}
 
 }
