@@ -4,9 +4,9 @@ ___
 
 ## Description
 
-symmer is my simplier take on NixOS's Home Manager system. symmer is an easier
+symmer is my simpler take on NixOS's Home Manager system. symmer is an easier
 way to manage your dotfiles and keep them all in one place using symlinks. This
-in turn makes handling configurations for different apps way simplier while
+in turn makes handling configurations for different apps way simpler while
 using the power of git to keep everything in one spot and version managed. 
 
 
@@ -19,14 +19,14 @@ using the power of git to keep everything in one spot and version managed.
 3. Use ```symmer``` in your terminal to get started!
 
 ### Build
-```go
+```
 git clone https://github.com/Tyy47/symmer.git
 cd symmer  
 go build
 ```
 
 ### Go Install
-```go
+```
 git clone https://github.com/Tyy47/symmer.git
 cd symmer  
 go install
